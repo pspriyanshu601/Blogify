@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import connectToDatabase from "./database/db.js";
 import path from "path";
 import userRouter from "./routes/user.js";
+import cookieParser from "cookie-parser";
+import checkForAuthenticationCookie from "./middlewares/authentication.js";
 
 dotenv.config();
 
@@ -14,17 +16,19 @@ connectToDatabase();
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 app.use(express.json());
+app.use(cookieParser());
+
+app.use(checkForAuthenticationCookie("token"));
 
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: "Server is healthy, no worries!",
+  res.render("home", {
+    user:req.user,
   });
 });
 
-app.use("/auth", userRouter);
+app.use("/user", userRouter);
 
 // Start the server
 app.listen(port);

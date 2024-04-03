@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <%- include("./partials/head.ejs") %>
+    <title>Document</title>
+  </head>
+  <body>
+   <%-include("./partials/script.ejs")%>
+   <!-- <h1>Hello</h1> -->
+   <%- include("./partials/nav.ejs") %>
+   <%= JSON.stringify(user)%>
+  </body>
+</html>
