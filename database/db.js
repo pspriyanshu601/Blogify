@@ -7,10 +7,13 @@ const uri = process.env.DATABASE_URL;
 
 mongoose.connect(uri);
 
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Database connected");
-});
+async function connectToDatabase() {
+  try {
+    await mongoose.connect(uri);
+    console.log("Database connected");
+  } catch (error) {
+    console.error("Database connection error:", error);
+  }
+}
 
-export default db;
+export default connectToDatabase;
