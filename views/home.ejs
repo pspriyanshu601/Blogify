@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-   <%- include("./partials/head.ejs") %>
+    <%- include("./partials/head.ejs") %>
     <title>Document</title>
   </head>
   <body>
-   <%-include("./partials/script.ejs")%>
-   <!-- <h1>Hello</h1> -->
-   <%- include("./partials/nav.ejs") %>
-   <%= JSON.stringify(user)%>
+    <%-include("./partials/script.ejs")%>
+    <!-- <h1>Hello</h1> -->
+    <%- include("./partials/nav.ejs") %> <%= JSON.stringify(blogs)%>
+    <div class="container mt-3 row row-cols-4">
+      
+        <% blogs.forEach(element => { %>
+          <div class="col">
+        <div class="card" style="width: 18rem">
+          <img
+            src="<%= element.coverImageURL %>"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title"><%= element.title %></h5>
+            <p class="card-text"><%= element.body %></p>
+            <a href="/blog/<%= element._id %>" class="btn btn-primary"
+              >See full blog</a
+            >
+          </div>
+        </div>
+      </div>
+        <% }) %>
+      
+    </div>
   </body>
 </html>
