@@ -7,7 +7,7 @@
   <body>
     <%-include("./partials/script.ejs")%>
     <!-- <h1>Hello</h1> -->
-    <%- include("./partials/nav.ejs") %> <%= JSON.stringify(blogs)%>
+    <%- include("./partials/nav.ejs") %>
     <div class="container mt-3 row row-cols-4">
       
         <% blogs.forEach(element => { %>
@@ -20,7 +20,6 @@
           />
           <div class="card-body">
             <h5 class="card-title"><%= element.title %></h5>
-            <p class="card-text"><%= element.body %></p>
             <a href="/blog/<%= element._id %>" class="btn btn-primary"
               >See full blog</a
             >

@@ -26,12 +26,15 @@ app.use(checkForAuthenticationCookie("token"));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
-  const allBlogs = await Blog.find({}).sort("createdAt");
-
-  res.render("home", {
-    user: req.user,
-    blogs:allBlogs
-  });
+  try {
+    const allBlogs = await Blog.find({});
+    res.render("home", {
+      user: req.user,
+      blogs: allBlogs,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.use("/user", userRouter);
